@@ -14,16 +14,39 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: white;
+  
 }
 #nav {
+  font-size: 20px;
+  margin-top: 0px;
   padding: 30px;
   a {
+    text-decoration: none;
     font-weight: bold;
-    color: #2c3e50;
+    color: #8a8695;
     &.router-link-exact-active {
-      color: #42b983;
+      text-decoration-line: underline;
+      color: #f08ce3;
     }
   }
 }
+
 </style>
+
+<script>
+export default {
+  data(){
+    return {
+
+    }
+  },
+  methods:{
+    // shuffleArr(){
+    //         this.arr.sort(() => Math.random() - 0.5)
+    // },
+  }
+
+  
+}
+</script>
