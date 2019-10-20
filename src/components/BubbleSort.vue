@@ -3,9 +3,9 @@
   <!-- <chart :arr="arr"/>   -->
   <div id="buttons">
     <button @click="bubbleSortMethod(arr)" id="sort"> Sort!</button>
-    <button @click="onClickButton()" id="shuffle">Shuffle</button>
+    <!-- <button @click="onClickButton()" id="shuffle">Shuffle</button> -->
   </div>
-  <input type="range" min="0" max="2000" value="100" v-model="speed" step="100">
+  <input type="range" min="0" max="500" value="100" v-model="speed" step="1">
   <p>{{speed}}</p>
   <p>Number of Iterations {{interations}}</p>
   <div id="chart" >
@@ -44,11 +44,11 @@ computed:{
 methods:{
       styleTheItem(item,arrLen){
         return {
-          'margin': '0 1px',  
-          'width': (arrLen/100) + '%', 
+          // 'margin': '0 1px',  
+          'width': (100/arrLen) + '%', 
           'height': (item/arrLen)*500 + 'px',
-          // 'background-color': '', 
-          'border' : '2px solid #f08ce3'          
+          // 'background-color': 'red', 
+          'border' : (100/arrLen) + 'px solid #f08ce3'          
           }
       },
       bubbleSortMethod(arr){
@@ -167,9 +167,12 @@ mounted(){
         background-color: darkred;
     }
   #chart  {
+    width: 100%;
     display: flex;
     justify-content:space-evenly;
     align-items: flex-end;
-    margin: 0px 200px 0px 200px
+    flex-grow: 1;
+    /* margin: 0px 200px 0px 200px; */
+    
   }
 </style>
