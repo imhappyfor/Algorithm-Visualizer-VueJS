@@ -49,6 +49,7 @@ methods:{
           'height': (item/arrLen)*500 + 'px',
           // 'background-color': 'red', 
           'border' : (100/arrLen) + 'px solid #f08ce3'          
+          
           }
       },
       bubbleSortMethod(arr){
@@ -171,8 +172,7 @@ mounted(){
     display: flex;
     justify-content:space-evenly;
     align-items: flex-end;
-    flex-grow: 1;
-    /* margin: 0px 200px 0px 200px; */
-    
+    /* flex-grow: 1;         */
+    /* flex-shrink: 1; */
   }
 </style>

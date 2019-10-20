@@ -1,13 +1,26 @@
 <template>
   <div>
-    <div style="display: flex; justify-content: left">
-    <input v-model.number.lazy="arraySize" type="number" style="width:100px" @change="arrayCreation(arraySize)"/>
-    <select v-model="currentTab" style="font-size: 1em;width: 250px; margin-left: 0px; border-radius:5px ">
-    <option disabled value="">Please select an algorithm</option>
-    <option v-for="tab in tabs" :key='tab'>   {{tab}}   </option>
-    </select>
-    <button @click="onClickChild(arr)" style="font-size: 1.4em; border-radius: 5px; width: 100px;;">Shuffle</button>
-    
+    <div style="display: flex; justify-content: space-evenly">
+      <div>
+      <label for="number-input" > Enter a number from 1 to 1000 to generate an array and shuffle</label>
+      <br style="clear:both;" />
+      <p>{{this.arraySize}}</p>
+      <input type="range" min="0" max="1000" value="100" v-model.number="arraySize" @change="arrayCreation(arraySize)" step="1">
+  
+      </div>
+      <div>
+        <label for="tab-selection" > Choose the algorithm to visualize</label>
+        <br style="clear:both;" />
+        <select id="tab-selection" v-model="currentTab" style="font-size: 1em;width: 250px; margin-left: 0px; border-radius:5px ">
+          <option disabled value="">Please select an algorithm</option>
+          <option v-for="tab in tabs" :key='tab'>   {{tab}}   </option>
+        </select>
+      </div>
+      <div>
+      <label for="shuffle-button" > Press to shuffle the new array</label>
+      <br style="clear:both;" />
+      <button id="shuffle-button" @click="onClickChild(arr)" style="font-size: 1.4em; border-radius: 5px; width: 100px;;">Shuffle</button>
+      </div>
     </div>
     <!-- <div id="template" > -->
     <!-- <canvas id="myCanvas" style="border:1.5px solid #f08ce3;"></canvas> -->
@@ -35,7 +48,7 @@ export default {
       arr : [],
       low : 0,
       high : 0,
-      arraySize: 30,
+      arraySize: 50,
       currentTab: 'Bubblesort',
       tabs: ['Quicksort', 'Bubblesort'],
     }
@@ -79,7 +92,10 @@ watch:{
 </script> 
 
 <style scoped>
-
+ p {
+   font-size: 1.2em;
+   color: #f08ce3;
+ }
 #template {
   /* colors */
   background-color: rgb(255, 255, 255);
@@ -96,6 +112,7 @@ watch:{
   margin: 0; */
   color: #f08ce3;
 }
+
 
 #myCanvas{
   /* width: 100%; */
