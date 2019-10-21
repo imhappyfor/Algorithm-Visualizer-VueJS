@@ -1,8 +1,10 @@
 <template>
 <div>
   <!-- <chart :arr="arr"/>   -->
+  
   <div id="buttons">
     <button @click="bubbleSortMethod(arr)" id="sort"> Sort!</button>
+    <button @click="clearTimer()"> clear timer test</button>
     <!-- <button @click="onClickButton()" id="shuffle">Shuffle</button> -->
   </div>
   <input type="range" min="0" max="500" value="100" v-model="speed" step="1">
@@ -28,6 +30,7 @@ data(){
   return{
     interations: new Number,
     speed: 100,
+    timeOutFunction: null
 
   }
 
@@ -42,6 +45,10 @@ computed:{
 
 },
 methods:{
+    clearTimer(){
+      window.clearTimeout(this.timeOutFunction);
+    },
+
       styleTheItem(item,arrLen){
         return {
           // 'margin': '0 1px',  
@@ -53,34 +60,45 @@ methods:{
           }
       },
       bubbleSortMethod(arr){
-        let index = index
-         let i = 1;
-          let j = 1;
+          let index = index
+          let i = 0;
+          let j = 0;
           let length = arr.length + 1;
           let speed = this.speed;
-          let x = (function nextIteration() {
-            window.clearTimeout(x);
+          this.timeOutFunction = (function nextIteration() {
+            
             if (j >= length - i - 1) {
               j = 0;
               i++;
             }
             if (i < length) {
+              //let currPos = arr[j]
               // if (j != 0) {
-              // document.getElementById(arr[j]).style.backgroundColor = 'yellow';
+              document.getElementById(arr[j]).style.backgroundColor = '';
               // }
+              // console.log(i,j)
+              // document.getElementById(arr[j]-1).style.backgroundColor = 'blue';
               if (arr[j] > arr[j+1]) {
+                
                 // swap arr
                 let temp = arr[j];
                 let swap = arr[j+1]
+                console.log(temp,swap)
+                let currPos = temp
                 Vue.set(arr,j,arr[j+1]);
+
+                document.getElementById(temp).style.backgroundColor = 'blue'
+                
+                document.getElementById(swap).style.backgroundColor = 'white';
+                document.getElementById(temp).style.backgroundColor = '';
                 //get the index(position of the current element)
                 // let currPos = arr.indexOf(temp) -1
-                // document.getElementById(currPos).style.backgroundColor = 'red';
+                
+                // console.log(currPos, "***this is the current position")
+                // document.getElementById(swap).style.backgroundColor = 'red';
                 Vue.set(arr,j+1,temp);
                 
               }
-              
-
               j++;
               
               window.setTimeout(nextIteration,  speed );
@@ -89,8 +107,6 @@ methods:{
               console.log('done')
           })(); 
 },
-
-       
 //        this.interations = 0
 //         const arrlen = arr.length
 //           for(let i = 0; i < arrlen; i++){

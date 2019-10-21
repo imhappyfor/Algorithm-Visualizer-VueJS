@@ -4,8 +4,8 @@
       <div>
       <label for="number-input" > Enter a number from 1 to 1000 to generate an array and shuffle</label>
       <br style="clear:both;" />
-      <p>{{this.arraySize}}</p>
-      <input type="range" min="0" max="1000" value="100" v-model.number="arraySize" @change="arrayCreation(arraySize)" step="1">
+      <p>{{this.arraySize - 1}}</p>
+      <input type="range" min="2" max="1001" value="100" v-model.number="arraySize" @change="arrayCreation(arraySize)" step="1">
   
       </div>
       <div>
@@ -13,7 +13,7 @@
         <br style="clear:both;" />
         <select id="tab-selection" v-model="currentTab" style="font-size: 1em;width: 250px; margin-left: 0px; border-radius:5px ">
           <option disabled value="">Please select an algorithm</option>
-          <option v-for="tab in tabs" :key='tab'>   {{tab}}   </option>
+          <option v-for="tab in tabs" :key='tab'>   {{tab}}  </option>
         </select>
       </div>
       <div>
