@@ -12,28 +12,28 @@
       <label for="changeSpeed" style="margin: auto;">Speed</label>
       </div>
       <hr>
-      <!-- <p v-if="!sorted">The array unsorted: {{ arr }}</p> -->
-      <!-- <p v-else>The array sorted: {{ arr }}</p> -->
-
+        <div id="chart" >
+            <span v-for="(item, index) in arr" 
+            :key="index"  
+            :style="styleTheItem(item,arr.length)" 
+            :id="item"
+            ></span>
+        </div>
   </div>
 </template>
 
 <script>
-import {draw, swap} from '../js/canvas'
+import {swap} from '../js/canvas'
 import Vue from 'vue'
-
 export default {
 data(){
     return {     
         sorted : false,
         emition: null,
         speed: 0
-        // chartArray: []
        }
 },
-components:{
-    // chart
-},
+components:{},
 props:{
     arr : Array,
     low: Number,
@@ -42,60 +42,78 @@ props:{
 created(){
 },
 methods: {
+    styleTheItem(item,arrLen){
+        return {
+          // 'margin': '0 1px',  
+        //   'width': (100/arrLen) + 'px', 
+          'width': (100/arrLen) + '%', 
+          'height': (item/arrLen)*500 + 'px',
+        //   'background-color': 'rgba(234,234,234,50)', 
+          'border' : (100/arrLen)+ 'px solid #f08ce3'          
+          
+          }
+      },
     quickSortMethod(arr,low,high,speed){
 
-        (function(){
-            function partition(arr, low , high){
+        
+        function partition(arr, low , high){
             let i = (low-1)
             let pivot = arr[high]
             let temp = 0
             for(let x = low; x < high; x++){
                 // setTimeout(function(){ 
+                document.getElementById(arr[x]).style.backgroundColor = 'white'
                 if (arr[x] < pivot){
+                    document.getElementById(arr[x]).style.backgroundColor = ''
+                        if (i >=0){
+                        // document.getElementById(arr[i]).style.backgroundColor = 'red'
+                        document.getElementById(arr[i+1]).style.backgroundColor = 'cyan'
+                                }
+
+                            
                     i = i+1
                     temp = arr[i]
                     Vue.set(arr,i,arr[x])
-                    // swap('myCanvas',arr,arr[i],arr[x],pivot)
-                    swap(arr[i], arr[x],'myCanvas',i,arr)
                     Vue.set(arr,x,temp)
-                    // swap('myCanvas',arr,arr[x ],arr[i],pivot)
-                    swap(arr[x], arr[i],'myCanvas',i,arr)
+                     
                 }
-                    // draw('myCanvas',arr,arr[i],arr[x],pivot,speed)
-                // },speed);
-                }           
+                    if (i >=2){
+                        document.getElementById(arr[i]).style.backgroundColor = ''
+                        document.getElementById(arr[i-1]).style.backgroundColor = ''
+                                }
+
+            }    
+                if (i >=0){
+                    document.getElementById(arr[i]).style.backgroundColor = ''
+                    document.getElementById(arr[i+1]).style.backgroundColor = ''
+                    }
                 temp = arr[i+1]
                 Vue.set(arr,i+1,arr[high])
-                swap(arr[i+1], arr[high],'myCanvas',i,arr)
-                // swap('myCanvas',arr,arr[i+1],arr[high],pivot)
                 Vue.set(arr,high,temp)
-                swap(arr[high], arr[i+1],'myCanvas',i,arr)
-                // swap('myCanvas',arr,arr[high],arr[i+1],pivot)
-
-                // draw('myCanvas',arr,arr[i+1],arr[high],pivot,speed)
-                // draw('myCanvas',arr,arr[high],arr[i+1 ],pivot,speed)
-
                 return ( i+1 ) 
-                } 
-                     
+                              
+
+            }    
         
         function quickSort(arr,low,high){
             if( low < high){
-                setTimeout(function(){
+                
                 let pi = partition(arr,low,high)
+                    window.setTimeout(function(){
                     quickSort(arr, low, pi-1)
-                    quickSort(arr, pi+1, high)
-                },speed)
+                    quickSort(arr, pi+1, high)},speed );
+                
+                }else{
+                    return 0
                 }
             }
               
         //run quicksort
-         setTimeout(quickSort(arr,low,high),speed)
-        })();
+          quickSort(arr,low,high)
+        
         //pass array back to home.vue so that the chart can update from this event
-        this.sorted = true
-        this.$emit('sorted', this.arr)
-             
+        // this.sorted = true
+        // this.$emit('sorted', this.arr)           
 },
     onClickButton() {
             this.$emit('clicked', this.arr)
@@ -134,5 +152,10 @@ mouted(){
     #shuffle:hover {
         background-color: darkred;
     }
-
+  #chart  {
+    width: 100%;
+    display: flex;
+    justify-content:space-evenly;
+    align-items: flex-end;
+  }
 </style>

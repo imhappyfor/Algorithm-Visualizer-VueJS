@@ -19,7 +19,7 @@
       <div>
       <label for="shuffle-button" > Press to shuffle the new array</label>
       <br style="clear:both;" />
-      <button id="shuffle-button" @click="onClickChild(arr)" style="font-size: 1.4em; border-radius: 5px; width: 100px;;">Shuffle</button>
+      <button id="shuffle-button" :disabled="beingSorted === true" @click="onClickChild(arr)" style="font-size: 1.4em; border-radius: 5px; width: 100px;">Shuffle</button>
       </div>
     </div>
     <!-- <div id="template" > -->
@@ -113,7 +113,13 @@ watch:{
   color: #f08ce3;
 }
 
-
+    #shuffle-button {
+        opacity: 1;
+        background-color: rgb(67, 238, 133);
+    }
+    #shuffle-button:hover {
+        background-color: rgb(47, 207, 68);
+    }
 #myCanvas{
   /* width: 100%; */
   margin: 0;
