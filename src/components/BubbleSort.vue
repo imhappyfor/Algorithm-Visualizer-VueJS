@@ -8,7 +8,7 @@
   </div>
   <input type="range" min="0" max="500" value="100" v-model="speed" step="1" style="">
   <div style="display: flex; justify-content:space-evenly;">
-  <p>current speed : {{speed}}  </p>
+  <p>current speed : {{speed}} ms</p>
   <p> Use the slider above to set your speed</p>
   <p>Number of Iterations {{interations}} </p>
 
@@ -35,7 +35,7 @@ export default {
 data(){
   return{
     interations: new Number,
-    speed: 100,
+    speed:500,
     timeOutFunction: null,
     completed: false
   }

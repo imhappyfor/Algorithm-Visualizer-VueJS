@@ -1,24 +1,23 @@
 <template>
   <div>
-      <h3>QuickSort</h3>
-      <!-- <chart :arr="arr"/> -->
+    <div id="buttons">
+        <button @click="quickSortMethod(arr,low,high,speed)" id="sort"> Sort!</button>
+    </div>
 
-      <div id="buttons">
-      <button @click="quickSortMethod(arr,low,high,speed)" id="sort"> Sort!</button>
-      <button @click="onClickButton()" id="shuffle">Shuffle</button>
-      
-      
-      <input v-model="speed" type="number" id="changeSpeed" style="border-radius: 5px;text-align: center; width: 50px;" > 
-      <label for="changeSpeed" style="margin: auto;">Speed</label>
-      </div>
-      <hr>
-        <div id="chart" >
-            <span v-for="(item, index) in arr" 
+        <input type="range" min="0" max="500" value="100" v-model="speed" step="1">
+
+    <div style="display: flex; justify-content:space-evenly;">
+        <p>current speed : {{speed}} ms </p>
+        <p> Use the slider above to set your speed</p>
+        <p>Number of Iterations {{interations}} </p>
+    </div>
+         
+    <div id="chart" >
+        <span v-for="(item, index) in arr" 
             :key="index"  
             :style="styleTheItem(item,arr.length)" 
-            :id="item"
-            ></span>
-        </div>
+            :id="item"></span>
+    </div>
   </div>
 </template>
 
@@ -30,7 +29,8 @@ data(){
     return {     
         sorted : false,
         emition: null,
-        speed: 0
+        speed: 500,
+        interations: 0
        }
 },
 components:{},
@@ -115,10 +115,6 @@ methods: {
         // this.sorted = true
         // this.$emit('sorted', this.arr)           
 },
-    onClickButton() {
-            this.$emit('clicked', this.arr)
-            this.sorted = false
-    },
 },
 watch: {
 

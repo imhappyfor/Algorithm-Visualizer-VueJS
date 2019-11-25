@@ -2,7 +2,7 @@
   <div>
     <div style="display: flex; justify-content: space-evenly">
       <div>
-      <label for="number-input" > Enter a number from 1 to 1000 to generate an array and shuffle</label>
+      <label for="number-input" >Select the size of the array with the slider below</label>
       <br style="clear:both;" />
       <p>{{this.arraySize - 1}}</p>
       <input type="range" min="2" max="1001" value="100" v-model.number="arraySize" @change="arrayCreation(arraySize)" step="1">
